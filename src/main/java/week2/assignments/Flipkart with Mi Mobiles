@@ -1,0 +1,46 @@
+package week2.Assignments;
+
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class flipkart {
+
+	public static void main(String[] args) throws InterruptedException {
+
+
+		System.setProperty("webdriver.chrome.driver", "./drivers/Chromedriver/chromedriver.exe");
+
+		ChromeDriver browser = new ChromeDriver();
+
+		browser.get("http://flipkart.com");
+		browser.manage().window().maximize();
+		browser.findElementByXPath("//button[text() = '✕']").click();
+		WebElement electronics = browser.findElementByXPath("//span[text() = 'Electronics']");
+		Actions builder = new Actions(browser);
+		builder.moveToElement(electronics).perform();
+		Thread.sleep(3000);
+
+		browser.findElementByXPath("//a[text() = 'Mi']").click();
+		boolean displayed = false;
+		Thread.sleep(2000);
+		displayed = browser.findElementByXPath("//h1[text() = 'Mi Mobiles']").isDisplayed();
+
+		System.out.println(displayed);
+
+		List<WebElement> Phonemodels = browser.findElementsByXPath("//div[contains(text(), 'mi')]");
+		Phonemodels.size();
+		System.out.println(Phonemodels.size());
+		for (int i = 0; i < Phonemodels.size()-1; i++) {
+
+			Phonemodels.get(i).getText();
+
+			System.out.println(Phonemodels.get(i).getText());
+
+		}
+
+
+	}
+}
